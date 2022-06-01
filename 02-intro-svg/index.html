@@ -27,10 +27,16 @@
       <h1>Introducción a SVG</h1>
       <div id="graf" width="100%" class="graf mb-4"></div>
 
-      <button class="btn btn-info" onclick="deltax(-75)">Izq</button>
-      <button class="btn btn-info" onclick="deltay(-75)">Arr</button>
-      <button class="btn btn-info" onclick="deltay(75)">Aba</button>
-      <button class="btn btn-info" onclick="deltax(+75)">Der</button>
+      <select
+        id="colorSelect"
+        class="form-control mb-2"
+        onclick="delta({color: true})"
+      ></select>
+
+      <button class="btn btn-info" onclick="delta({ x: -50, y: 0})">Izq</button>
+      <button class="btn btn-info" onclick="delta({ y: -50 })">Arr</button>
+      <button class="btn btn-info" onclick="delta({ y: 50})">Aba</button>
+      <button class="btn btn-info" onclick="delta({ x: 50})">Der</button>
     </main>
     <footer>
       <div class="container"><span></span></div>
