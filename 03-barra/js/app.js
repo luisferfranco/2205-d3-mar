@@ -1,5 +1,8 @@
+// Selectores (elementos en el HTML)
 const graf = d3.select("#graf")
+const metrica = d3.select("#metrica")
 
+// Dimensiones
 const margins = {
   top: 50,
   right: 20,
@@ -12,6 +15,7 @@ const altoTotal = (anchoTotal * 9) / 16
 const ancho = anchoTotal - margins.right - margins.left
 const alto = altoTotal - margins.top - margins.bottom
 
+// Areas de dibujo
 const svg = graf
   .append("svg")
   .attr("width", anchoTotal)
@@ -31,13 +35,24 @@ const g = svg
   .append("g")
   .attr("transform", `translate(${margins.left}, ${margins.top})`)
 
-const load = async () => {
+const draw = async (m = "clientes") => {
   let data = await d3.csv("barras.csv", d3.autoType)
   data.sort((a, b) => b.clientes - a.clientes)
 
+  // Llenar el select
+  // console.log(data)
+  // console.log(Object.keys(data[0]).slice(1))
+  metrica
+    .selectAll("option")
+    .data(Object.keys(data[0]).slice(1))
+    .enter()
+    .append("option")
+    .attr("value", (d) => d)
+    .text((d) => d)
+
   // Accessor
   const xAccessor = (d) => d.tienda
-  const yAccessor = (d) => d.clientes
+  const yAccessor = (d) => d[m]
 
   // Escaladores
   const tiendas = d3.map(data, (d) => d.tienda)
@@ -52,6 +67,7 @@ const load = async () => {
     .domain([0, d3.max(data, yAccessor)])
     .range([alto, 0])
 
+  // Dibujo de las barras
   const rect = g
     .selectAll("rect")
     .data(data)
@@ -62,6 +78,7 @@ const load = async () => {
     .attr("width", x.bandwidth())
     .attr("height", (d) => alto - y(yAccessor(d)))
 
+  // Título
   g.append("text")
     .attr("x", ancho / 2)
     .attr("y", -10)
@@ -69,6 +86,7 @@ const load = async () => {
     .classed("titulo", true)
     .text("Clientes por Tienda")
 
+  // Ejes
   const xAxis = d3.axisBottom(x)
   const xAxisGroup = g
     .append("g")
@@ -77,6 +95,16 @@ const load = async () => {
     .call(xAxis)
   const yAxis = d3.axisLeft(y).ticks(10)
   const yAxisGroup = g.append("g").classed("axis", true).call(yAxis)
+
+  // Escucha de Eventos
+  metrica.on("change", (e) => {
+    e.preventDefault()
+    console.log(metrica.node().value)
+  })
+
+  d3.select("#formu").on("submit", (e) => {
+    e.preventDefault()
+  })
 }
 
-load()
+draw()
