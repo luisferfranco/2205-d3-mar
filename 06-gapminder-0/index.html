@@ -11,13 +11,41 @@
       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
     <main class="container mt-4">
       <h1>Clon Gapminder</h1>
-      <div id="graf" width="100%"></div>
+      <section id="controles" class="mb-2">
+        <button class="btn btn-primary" id="atras">
+          <i class="fa-solid fa-hand-point-left"></i>
+        </button>
+        <button class="btn btn-success" id="play">
+          <i class="fa-solid fa-play"></i>
+        </button>
+        <button class="btn btn-primary" id="adelante">
+          <i class="fa-solid fa-hand-point-right"></i>
+        </button>
+      </section>
+      <div id="graf" width="100%">
+        <div id="tooltip" style="display: none">
+          <div class="country" id="country">India</div>
+          <div class="country-data">
+            Income: <span id="country-income">xxxx</span><br />
+            Life Exp: <span id="country-lifeexp">xxxx</span><br />
+            Population: <span id="country-population">xxxx</span>
+          </div>
+        </div>
+      </div>
     </main>
+
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
       integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"

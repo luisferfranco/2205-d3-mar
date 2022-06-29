@@ -17,3 +17,25 @@ body {
   font-size: 18px;
   shape-rendering: geometricPrecision;
 }
+
+.year {
+  font-size: 130px;
+  fill: #ccc;
+}
+
+#tooltip {
+  background-color: #aaa;
+  padding: 5px;
+  border: 1px solid #555;
+  position: absolute;
+}
+
+#tooltip .country {
+  font-size: 25px;
+  text-align: center;
+}
+
+#tooltip .country-data {
+  color: #eee;
+  font-size: 10px;
+}
